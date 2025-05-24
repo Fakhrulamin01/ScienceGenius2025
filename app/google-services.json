@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "106496453333",
+    "firebase_url": "https://sciencegenius2025-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sciencegenius2025",
+    "storage_bucket": "sciencegenius2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106496453333:android:7ed6c1ca933045c453105c",
+        "android_client_info": {
+          "package_name": "com.example.sciencegenius2025"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeC7Zsa7LfbZ-VfIrl7483hmNj-b9wpxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

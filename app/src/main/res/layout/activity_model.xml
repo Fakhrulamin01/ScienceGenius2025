@@ -1,0 +1,107 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/ux_fragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#66000000"
+        android:gravity="center_horizontal">
+
+        <!-- One row for 9 model buttons -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 1"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 2"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 3"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 4"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 5"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 6"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 7"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 8"
+                    android:layout_margin="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model 9"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Clear Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_clear_models"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear Models"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</FrameLayout>

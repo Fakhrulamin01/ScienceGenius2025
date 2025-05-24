@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F2FD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌞 Our Solar System!"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#0D47A1"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <!-- Solar system main image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/solar_system_main"
+            android:scaleType="centerInside" />
+
+        <!-- Introduction -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌍 What is the Solar System?\n\nOur Solar System is made up of the Sun and everything that orbits around it—planets, moons, comets, and more!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#01579B"
+            android:paddingTop="8dp" />
+
+        <!-- Planets section -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/planets_labeled"
+            android:scaleType="centerInside"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🪐 The Planets\n\n☿ Mercury – the closest and fastest planet!\n♀ Venus – super hot and cloudy.\n🌍 Earth – our beautiful home!\n♂ Mars – the red planet with dusty storms.\n♃ Jupiter – the biggest of all!\n♄ Saturn – with its amazing rings.\n♅ Uranus – rolls like a ball!\n♆ Neptune – dark, windy, and cold."
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#01579B"
+            android:paddingTop="8dp" />
+
+        <!-- Fun Fact -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/solar_fact"
+            android:scaleType="centerInside"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✨ Did You Know?\n\nThe Sun is so big that about 1.3 million Earths could fit inside it!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#01579B"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp" />
+
+    </LinearLayout>
+</ScrollView>

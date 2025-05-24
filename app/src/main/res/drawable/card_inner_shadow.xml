@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom shadow -->
+    <item android:top="2dp" android:left="2dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp"/> <!-- Slightly less than card radius -->
+            <gradient
+                android:angle="135"
+                android:startColor="#20000000"
+                android:endColor="@android:color/transparent"
+                android:type="linear"/>
+        </shape>
+    </item>
+
+    <!-- Main content area -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp"/>
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+</layer-list>

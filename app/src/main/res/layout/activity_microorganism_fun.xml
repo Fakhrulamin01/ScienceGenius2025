@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🦠 Meet the Microorganisms!"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#00796B"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <!-- What are microorganisms -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/microorganisms_intro"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔬 What Are They?\n\nMicroorganisms are tiny living things you can’t see without a microscope!\nThey live almost everywhere – in air, water, even inside us!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#004D40"
+            android:paddingTop="8dp" />
+
+        <!-- Types of microorganisms -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/microorganism_types"
+            android:scaleType="centerInside"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧫 Types of Microorganisms\n\n🦠 Bacteria – some help, some make us sick!\n🧵 Fungi – like mold on old bread!\n🌀 Protozoa – they love water!\n🧬 Viruses – super tiny and cause colds and flu!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#004D40"
+            android:paddingTop="8dp" />
+
+        <!-- Good vs Bad -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/good_vs_bad_microbes"
+            android:scaleType="centerInside"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👍 Good or Bad?\n\n✅ Good microbes help us digest food and make yogurt!\n❌ Bad microbes can cause tummy aches and flu.\nWe need to know the difference!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#004D40"
+            android:paddingTop="8dp" />
+
+        <!-- Hygiene -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/clean_hands"
+            android:scaleType="centerInside"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧼 Stay Clean, Stay Safe!\n\n🚿 Wash hands before eating!\n🥴 Don’t share spoons and cups!\n🍽 Keep food covered!\n👃 Sneeze into your elbow!"
+            android:textSize="17sp"
+            android:fontFamily="@font/comic_font"
+            android:textColor="#004D40"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp" />
+
+    </LinearLayout>
+</ScrollView>
