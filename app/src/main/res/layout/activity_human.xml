@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8F5E9">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F3E5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,98 +16,195 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🧍‍♂️ Let’s Learn About Humans!"
+            android:text=""
             android:textSize="28sp"
             android:textStyle="bold"
             android:fontFamily="@font/comic_font"
-            android:textColor="#D84315"
+            android:textColor="#2E7D32"
             android:layout_gravity="center_horizontal"
             android:paddingBottom="16dp" />
 
-        <!-- Body Systems -->
-        <ImageView
+        <!-- Section 1: Body Systems -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/body_systems"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="💪 Our Amazing Body Systems!\n\n🦴 Bones give our body shape!\n💥 Muscles let us jump and run!\n🍔 Our tummy (digestive system) turns food into energy!\n😮‍💨 Lungs help us breathe in fresh air!\n❤️ Heart sends blood all around!\n🚽 Kidneys clean up our body’s waste!"
-            android:textSize="17sp"
-            android:fontFamily="@font/comic_font"
-            android:textColor="#4E342E"
-            android:paddingTop="8dp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#FFECB3">
 
-        <!-- Five Senses -->
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/body_systems"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/section1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:background="@drawable/speech_bubble"
+                    android:elevation="2dp"
+                    android:layout_marginTop="12dp"
+                    android:padding="12dp"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/comic_font"
+                    android:textColor="#4E342E"
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section 2: Five Senses -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/five_senses"
-            android:scaleType="centerInside"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="👀 See, Hear, Smell, Taste, Touch!\n\n👁 Eyes let us see the world!\n👂 Ears help us hear music and sounds!\n👃 Nose smells yummy food!\n👅 Tongue tastes sweet, sour and spicy!\n🖐 Skin feels soft, hot, cold or ouch!"
-            android:textSize="17sp"
-            android:fontFamily="@font/comic_font"
-            android:textColor="#4E342E"
-            android:paddingTop="8dp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#BBDEFB">
 
-        <!-- Growth and Development -->
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/five_senses"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/section2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/speech_bubble"
+                    android:elevation="2dp"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/comic_font"
+                    android:textColor="#4E342E"
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section 3: Growth -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/growth"
-            android:scaleType="centerInside"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🌱 Watch Me Grow!\n\nWe all start small — like babies!\nThen we grow taller, smarter, and stronger!\nTo grow well:\n✅ Eat good food\n✅ Sleep enough\n✅ Play and learn every day!"
-            android:textSize="17sp"
-            android:fontFamily="@font/comic_font"
-            android:textColor="#4E342E"
-            android:paddingTop="8dp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#C8E6C9">
 
-        <!-- Hygiene -->
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/growth"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/section3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/speech_bubble"
+                    android:elevation="2dp"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/comic_font"
+                    android:textColor="#4E342E"
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section 4: Hygiene -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/hygiene"
-            android:scaleType="centerInside"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🧼 Stay Clean and Happy!\n\n🪥 Brush your teeth in the morning and night!\n🛁 Bath every day to smell nice!\n🖐 Wash hands before eating.\n💧 Drink lots of water to stay fresh!"
-            android:textSize="17sp"
-            android:fontFamily="@font/comic_font"
-            android:textColor="#4E342E"
-            android:paddingTop="8dp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#FFE0B2">
 
-        <!-- Healthy Habits -->
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/hygiene"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/section4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/speech_bubble"
+                    android:elevation="2dp"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/comic_font"
+                    android:textColor="#4E342E"
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section 5: Healthy Habits -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/healthy_habits"
-            android:scaleType="centerInside"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="💚 Healthy Kid Tips!\n\n🌙 Sleep early to grow strong.\n🤸‍♀️ Run and play every day!\n🍎 Eat fruits and veggies!\n🚫 No junk food every day!\n🚿 Stay clean and smile big!"
-            android:textSize="17sp"
-            android:fontFamily="@font/comic_font"
-            android:textColor="#4E342E"
-            android:paddingTop="8dp"
-            android:paddingBottom="32dp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#DCEDC8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/healthy_habits"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/section5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/speech_bubble"
+                    android:elevation="2dp"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/comic_font"
+                    android:textColor="#4E342E"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="32dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>

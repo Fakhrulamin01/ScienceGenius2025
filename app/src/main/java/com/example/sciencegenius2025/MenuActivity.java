@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private CardView cardChapters, cardViewModel, cardQuiz, cardLogout;
+    private CardView cardChapters, cardViewModel, cardQuiz, cardLogout, cardHistory;
     private TextView tvUsername;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -35,6 +35,8 @@ public class MenuActivity extends AppCompatActivity {
         cardViewModel = findViewById(R.id.cardViewModel);
         cardQuiz = findViewById(R.id.cardQuiz);
         cardLogout = findViewById(R.id.cardLogout);
+        cardHistory = findViewById(R.id.cardHistory);
+
 
         // Load animations
         Animation bounceAnim = AnimationUtils.loadAnimation(this, R.anim.card_bounce);
@@ -44,6 +46,8 @@ public class MenuActivity extends AppCompatActivity {
         cardViewModel.startAnimation(bounceAnim);
         cardQuiz.startAnimation(bounceAnim);
         cardLogout.startAnimation(bounceAnim);
+        cardHistory.startAnimation(bounceAnim);
+
 
         // Add press effect
         setupCardPressEffects();
@@ -56,7 +60,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setupCardPressEffects() {
-        int[] cards = {R.id.cardChapters, R.id.cardViewModel, R.id.cardQuiz, R.id.cardLogout};
+        int[] cards = {R.id.cardChapters, R.id.cardViewModel, R.id.cardQuiz, R.id.cardHistory, R.id.cardLogout};
 
         for (int cardId : cards) {
             CardView card = findViewById(cardId);
@@ -111,6 +115,12 @@ public class MenuActivity extends AppCompatActivity {
 
         cardQuiz.setOnClickListener(v -> {
             Toast.makeText(this, "Starting Quiz...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, TopicSelectionActivity.class));
+        });
+
+        cardHistory.setOnClickListener(v -> {
+            Toast.makeText(this, "Viewing Quiz History...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, QuizHistoryActivity.class));
         });
 
         cardLogout.setOnClickListener(v -> {
@@ -129,5 +139,7 @@ public class MenuActivity extends AppCompatActivity {
         if (cardViewModel != null) cardViewModel.clearAnimation();
         if (cardQuiz != null) cardQuiz.clearAnimation();
         if (cardLogout != null) cardLogout.clearAnimation();
+        if (cardHistory != null) cardHistory.clearAnimation();
+
     }
 }

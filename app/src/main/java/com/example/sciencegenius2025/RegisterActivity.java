@@ -75,7 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-
         String username = etUsername.getText().toString().trim();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -84,13 +83,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         String hashedPassword = hashPassword(password);
+        String realPassword = password;
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     String uid = authResult.getUser().getUid();
 
-                    // Save user info to Firestore
-                    db.collection("users").document(uid).set(new User(email, username, hashedPassword))
+                    // Save user info to Firestore including real password
+                    db.collection("users").document(uid).set(
+                                    new User(email, username, hashedPassword, realPassword))
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(this, "Welcome to Science Genius!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(this, LoginActivity.class));
@@ -103,8 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Register failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
-
     }
+
 
     private String hashPassword(String password) {
         try {
@@ -125,12 +126,16 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public static class User {
-        public String email, username, hashedPassword;
+        public String email, username, hashedPassword, realPassword;
+
         public User() {}
-        public User(String email, String username, String hashedPassword) {
+
+        public User(String email, String username, String hashedPassword, String realPassword) {
             this.email = email;
             this.username = username;
             this.hashedPassword = hashedPassword;
+            this.realPassword = realPassword;
         }
     }
+
 }

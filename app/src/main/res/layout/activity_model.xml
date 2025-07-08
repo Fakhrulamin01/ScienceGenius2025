@@ -8,6 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:backgroundTint="#4CAF50"
+        android:contentDescription="Rotate Model"
+        android:src="@android:drawable/ic_media_play" />
+
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
@@ -34,63 +44,63 @@
                     android:id="@+id/btn_model1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 1"
+                    android:text="Heart"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 2"
+                    android:text="Kidney"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 3"
+                    android:text="Skeleton"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 4"
+                    android:text="Virus"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 5"
+                    android:text="Bacteria"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 6"
+                    android:text="Fungi"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 7"
+                    android:text="Solar System"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 8"
+                    android:text="Earth"
                     android:layout_margin="4dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model 9"
+                    android:text="Sun"
                     android:layout_margin="4dp" />
             </LinearLayout>
         </HorizontalScrollView>
@@ -104,4 +114,6 @@
             android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
+
+
 </FrameLayout>

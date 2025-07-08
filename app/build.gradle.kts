@@ -47,6 +47,8 @@ dependencies {
     // Firebase
     implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-firestore:24.10.3")
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
+
 
     // Test libs
     testImplementation("junit:junit:4.13.2")
@@ -56,6 +58,6 @@ dependencies {
 
     implementation("com.google.ar:core:1.31.0")
     implementation("com.gorisse.thomas.sceneform:sceneform:1.20.0")
-}
 
+}
 }

@@ -34,14 +34,13 @@
         android:layout_gravity="center"
         android:paddingBottom="12dp"/>
 
-
     <GridLayout
         android:id="@+id/menuGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:columnCount="2"
-        android:rowCount="2"
+        android:rowCount="3"
         android:alignmentMode="alignMargins"
         android:padding="8dp"
         android:useDefaultMargins="true">
@@ -106,13 +105,12 @@
                 android:padding="16dp"
                 android:background="@drawable/card_inner_shadow">
 
-            <ImageView
+                <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:background="@drawable/circle_bg_blue"
                     android:padding="10dp"
                     android:src="@drawable/view_logo" />
-
 
                 <TextView
                     android:layout_width="148dp"
@@ -167,6 +165,87 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- History -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardElevation="16dp"
+            app:cardMaxElevation="24dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#D1C4E9">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp"
+                android:background="@drawable/card_inner_shadow">
+35
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/circle_bg_purple"
+                    android:padding="10dp"
+                    android:src="@drawable/history_logo" />
+
+                <TextView
+                    android:layout_width="139dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:paddingTop="8dp"
+                    android:text="📜 History"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Help -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHelp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardElevation="16dp"
+            app:cardMaxElevation="24dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#FFE0B2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp"
+                android:background="@drawable/card_inner_shadow">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/circle_bg_orange"
+                    android:padding="10dp"
+                    android:src="@drawable/help_logo" />
+
+                <TextView
+                    android:layout_width="139dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:paddingTop="8dp"
+                    android:text="🆘 Help"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
         <!-- Logout -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardLogout"
@@ -182,10 +261,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:background="@drawable/card_inner_shadow"
                 android:gravity="center"
-                android:padding="16dp"
-                android:background="@drawable/card_inner_shadow">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="72dp"
@@ -194,9 +273,8 @@
                     android:padding="10dp"
                     android:src="@drawable/logout_logo" />
 
-
                 <TextView
-                    android:layout_width="139dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/baloo"
                     android:paddingTop="8dp"
@@ -207,6 +285,9 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+
+
     </GridLayout>
     <ImageView
         android:layout_width="wrap_content"

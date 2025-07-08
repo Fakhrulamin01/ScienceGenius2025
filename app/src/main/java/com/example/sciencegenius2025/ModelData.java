@@ -8,3 +8,5 @@ public class ModelData {
     public String filename;
     public ModelRenderable renderable;
 }
+
+

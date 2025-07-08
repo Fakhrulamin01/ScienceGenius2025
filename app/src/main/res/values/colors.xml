@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightSkyblue">#E3F2FD</color>
+    <color name="result_high">#C8E6C9</color>        <!-- Light Green -->
+    <color name="result_medium">#FFF9C4</color>      <!-- Light Yellow -->
+    <color name="result_low">#FFCDD2</color>         <!-- Light Red -->
     <color name="splashBackgroundColor">#E0F7FA</color>
 </resources>

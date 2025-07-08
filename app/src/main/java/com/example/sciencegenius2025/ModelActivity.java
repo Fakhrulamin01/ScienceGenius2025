@@ -1,5 +1,6 @@
 package com.example.sciencegenius2025;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,33 +9,46 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
+
+
 import com.google.ar.core.Anchor;
 import com.google.ar.core.Pose;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import android.view.View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ModelActivity extends AppCompatActivity {
 
     private ArFragment arFragment;
+    private final ModelRenderable[] models = new ModelRenderable[9];
     private final List<AnchorNode> placedNodes = new ArrayList<>();
     private GestureDetector gestureDetector;
     private TransformableNode lastSelectedNode;
-    private final Map<String, ModelData> modelDataMap = new HashMap<>();
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ObjectAnimator rotationAnimator;
+    private boolean isRotating = false;
 
+
+    @SuppressLint("ObjectAnimatorBinding")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,85 +56,154 @@ public class ModelActivity extends AppCompatActivity {
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
 
-        // Swipe gesture
+        // Gesture detector for swipe rotation
         gestureDetector = new GestureDetector(this, new GestureListener());
         arFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> {
             gestureDetector.onTouchEvent(motionEvent);
             return false;
         });
 
-        // Load models from Firestore
-        loadModelsFromFirestore();
+        // Load 9 models
+        for (int i = 0; i < 9; i++) {
+            int index = i;
+            loadModel("model" + (i + 1) + ".glb", renderable -> models[index] = renderable);
+        }
 
-        // Clear button
+        // Model buttons
+        for (int i = 0; i < 9; i++) {
+            int modelIndex = i;
+            int buttonId = getResources().getIdentifier("btn_model" + (i + 1), "id", getPackageName());
+            Button modelButton = findViewById(buttonId);
+            modelButton.setOnClickListener(v -> {
+                if (models[modelIndex] != null) {
+                    placeModel(models[modelIndex], 0f);
+                } else {
+                    Toast.makeText(this, "Model " + (modelIndex + 1) + " not loaded yet", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         Button clearButton = findViewById(R.id.btn_clear_models);
         clearButton.setOnClickListener(v -> {
             for (AnchorNode node : placedNodes) {
-                if (node.getAnchor() != null) {
-                    node.getAnchor().detach();
-                }
+                node.getAnchor().detach();
                 node.setParent(null);
             }
             placedNodes.clear();
             lastSelectedNode = null;
+
+            isRotating = false;
+            if (rotationAnimator != null) {
+                rotationAnimator.cancel();
+            }
+
             Toast.makeText(this, "All models cleared", Toast.LENGTH_SHORT).show();
         });
 
-    }
+        FloatingActionButton rotateButton = findViewById(R.id.btn_rotate);
+        rotateButton.setOnClickListener(v -> {
+            if (lastSelectedNode == null) {
+                Toast.makeText(this, "No model selected", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-    private void loadModelsFromFirestore() {
-        CollectionReference modelsRef = db.collection("Models");
-
-        modelsRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-                    String modelId = doc.getString("Model_ID");
-                    String modelName = doc.getString("Model_Name");
-                    String filename = doc.getString("filename");
-
-                    loadModel(filename, renderable -> {
-                        ModelData data = new ModelData();
-                        data.modelId = modelId;
-                        data.modelName = modelName;
-                        data.filename = filename;
-                        data.renderable = renderable;
-
-                        modelDataMap.put(modelId, data);
-
-                        // Assign button if it exists
-                        int buttonId = getResources().getIdentifier("btn_" + modelId.toLowerCase(), "id", getPackageName());
-                        Button modelButton = findViewById(buttonId);
-                        if (modelButton != null) {
-                            modelButton.setOnClickListener(v -> {
-                                if (data.renderable != null) {
-                                    placeModel(data.renderable);
-                                } else {
-                                    Toast.makeText(this, "Model not ready", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
+            if (isRotating) {
+                if (rotationAnimator != null) {
+                    rotationAnimator.cancel();
                 }
+                rotateButton.setImageResource(android.R.drawable.ic_media_play);
+                isRotating = false;
             } else {
-                Log.e("ModelActivity", "Failed to get models from Firestore", task.getException());
+                rotationAnimator = ObjectAnimator.ofFloat(lastSelectedNode, "localRotation", 0f, 360f);
+                rotationAnimator.setDuration(4000);
+                rotationAnimator.setRepeatCount(ValueAnimator.INFINITE);
+                rotationAnimator.setRepeatMode(ValueAnimator.RESTART);
+                rotationAnimator.addUpdateListener(animation -> {
+                    float animatedValue = (float) animation.getAnimatedValue();
+                    lastSelectedNode.setLocalRotation(
+                            com.google.ar.sceneform.math.Quaternion.axisAngle(
+                                    new com.google.ar.sceneform.math.Vector3(0f, 1f, 0f),
+                                    animatedValue
+                            )
+                    );
+                });
+                rotationAnimator.start();
+                rotateButton.setImageResource(android.R.drawable.ic_media_pause);
+                isRotating = true;
             }
         });
+        uploadModelsToFirestore(); // TEMPORARY — call only once to upload metadata
     }
+
+    private void uploadModelsToFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        for (int i = 1; i <= 9; i++) {
+            String modelName = "model" + i + ".glb";
+            String category;
+
+            if (i <= 3) {
+                category = "Human";
+            } else if (i <= 6) {
+                category = "Microorganism";
+            } else {
+                category = "Solar System";
+            }
+
+            Map<String, Object> modelData = new HashMap<>();
+            modelData.put("Model_Name", modelName);
+            modelData.put("Model_Category", category);
+
+            String documentId = "model" + i; // <- Custom document name
+
+            db.collection("models")
+                    .document(documentId)
+                    .set(modelData)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("FirestoreUpload", "Model " + documentId + " uploaded successfully");
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("FirestoreUpload", "Error uploading " + documentId, e);
+                    });
+        }
+    }
+
+
 
     private void loadModel(String filename, java.util.function.Consumer<ModelRenderable> callback) {
-        ModelRenderable.builder()
-                .setSource(this, Uri.parse(filename))
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(callback)
-                .exceptionally(throwable -> {
-                    Log.e("ModelActivity", "Failed to load model: " + filename, throwable);
-                    runOnUiThread(() -> Toast.makeText(this, "Failed to load " + filename, Toast.LENGTH_SHORT).show());
-                    return null;
-                });
+        // Firebase Storage reference
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference modelRef = storage.getReference().child("models/" + filename);
+
+        try {
+            // Temp file to store downloaded model
+            File localFile = File.createTempFile("temp_model", ".glb");
+
+            modelRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri modelUri = Uri.fromFile(localFile);
+
+                ModelRenderable.builder()
+                        .setSource(this, modelUri)
+                        .setIsFilamentGltf(true)
+                        .build()
+                        .thenAccept(callback)
+                        .exceptionally(throwable -> {
+                            Log.e("ModelActivity", "Renderable build failed: " + filename, throwable);
+                            runOnUiThread(() -> Toast.makeText(this, "Failed to build model: " + filename, Toast.LENGTH_SHORT).show());
+                            return null;
+                        });
+
+            }).addOnFailureListener(e -> {
+                Log.e("ModelActivity", "Failed to download: " + filename, e);
+                Toast.makeText(this, "Download failed: " + filename, Toast.LENGTH_SHORT).show();
+            });
+
+        } catch (IOException e) {
+            Log.e("ModelActivity", "File creation failed", e);
+        }
     }
 
-    private void placeModel(ModelRenderable renderable) {
+    private void placeModel(ModelRenderable renderable, float offsetX) {
         if (arFragment.getArSceneView().getArFrame() == null) {
             Toast.makeText(this, "AR Frame not ready", Toast.LENGTH_SHORT).show();
             return;
@@ -133,7 +216,7 @@ public class ModelActivity extends AppCompatActivity {
 
         Anchor anchor = arFragment.getArSceneView().getSession().createAnchor(
                 Pose.makeTranslation(
-                        pos[0] - forward[0] * distance,
+                        pos[0] - forward[0] * distance + offsetX,
                         pos[1] - forward[1] * distance,
                         pos[2] - forward[2] * distance
                 )
@@ -149,18 +232,23 @@ public class ModelActivity extends AppCompatActivity {
         lastSelectedNode = node;
 
         if (node.getScaleController() != null) {
-            node.getScaleController().setMinScale(0.1f);
-            node.getScaleController().setMaxScale(5.0f);
+            node.getScaleController().setMinScale(0.05f);
+            node.getScaleController().setMaxScale(1.0f);
         }
-
+        // Set initial smaller scale (adjust values as needed)
+        node.setLocalScale(new com.google.ar.sceneform.math.Vector3(0.2f, 0.2f, 0.2f));
         node.select();
     }
 
+    // Gesture detector for swipe left/right
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final int SWIPE_THRESHOLD = 50;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 50;
+
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             if (lastSelectedNode != null) {
-                float rotationAmount = -distanceX * 0.1f;
+                float rotationAmount = -distanceX * 0.1f; // adjust sensitivity
                 com.google.ar.sceneform.math.Quaternion deltaRotation =
                         com.google.ar.sceneform.math.Quaternion.axisAngle(
                                 new com.google.ar.sceneform.math.Vector3(0f, 1f, 0f),
@@ -175,5 +263,6 @@ public class ModelActivity extends AppCompatActivity {
             }
             return true;
         }
+
     }
 }

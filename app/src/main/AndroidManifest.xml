@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA"
         tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
     <uses-feature android:name="android.hardware.camera.ar" android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -67,6 +68,28 @@
         <activity
             android:name=".ModelActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TopicSelectionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".QuizHistoryActivity"
+            android:label="Quiz History"
+            android:exported="false"
+            android:parentActivityName=".MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuActivity" />
+        </activity>
 
 
     </application>
