@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/doodle" />
+
+    <!-- Dim overlay to reduce brightness -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AAFFFFFF" /> <!-- 70% opacity black overlay -->
+
+    <!-- Your content layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressCorrect"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="0"
+            android:progressTint="#4CAF50"
+            android:backgroundTint="#BDBDBD" />
+
+        <!-- Progress Label -->
+        <TextView
+            android:id="@+id/tvCorrectProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct: 0 / 10"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/comic_font" />
+
+        <!-- Question Number -->
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question 1 of 10"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/comic_font" />
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question text here"
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/comic_font" />
+
+        <!-- Answer Options -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/optionsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+
+    </LinearLayout>
+</FrameLayout>
