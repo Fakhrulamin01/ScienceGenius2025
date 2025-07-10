@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFF3E0"
+    android:background="@drawable/topic_bg_select"
     android:gravity="center">
 
     <TextView
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#F8919C"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
@@ -53,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#F3EB92"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
@@ -83,6 +85,7 @@
         android:id="@+id/cardSolarSystem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="#98D5EE"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 

@@ -2,6 +2,7 @@ package com.example.sciencegenius2025;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -18,6 +19,10 @@ public class TopicSelectionActivity extends AppCompatActivity {
         CardView cardMicroorganism = findViewById(R.id.cardMicroorganism);
         CardView cardSolarSystem = findViewById(R.id.cardSolarSystem);
 
+        applyCardTouchEffect(cardHumans);
+        applyCardTouchEffect(cardMicroorganism);
+        applyCardTouchEffect(cardSolarSystem);
+
         // Set click listeners
         cardHumans.setOnClickListener(v -> startQuiz("Humans"));
         cardMicroorganism.setOnClickListener(v -> startQuiz("Microorganism"));
@@ -31,4 +36,25 @@ public class TopicSelectionActivity extends AppCompatActivity {
         // Optional: Add animation
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
+    private void applyCardTouchEffect(CardView card) {
+        card.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    card.setCardElevation(2f); // lower elevation = pressed
+                    card.setScaleX(0.98f);     // slightly scale down for 3D feel
+                    card.setScaleY(0.98f);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    card.setCardElevation(8f); // restore elevation
+                    card.setScaleX(1f);
+                    card.setScaleY(1f);
+                    break;
+            }
+            return false; // so normal click still works
+        });
+    }
+
+
 }

@@ -1,22 +1,28 @@
 package com.example.sciencegenius2025;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.view.MotionEvent;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import com.google.firebase.auth.FirebaseAuth;
 import android.widget.TextView;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Random;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private CardView cardChapters, cardViewModel, cardQuiz, cardLogout, cardHistory;
+    private CardView cardChapters, cardViewModel, cardQuiz, cardLogout, cardHelp, cardHistory;
     private TextView tvUsername;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -34,33 +40,31 @@ public class MenuActivity extends AppCompatActivity {
         cardChapters = findViewById(R.id.cardChapters);
         cardViewModel = findViewById(R.id.cardViewModel);
         cardQuiz = findViewById(R.id.cardQuiz);
+        cardHelp = findViewById(R.id.cardHelp);
         cardLogout = findViewById(R.id.cardLogout);
         cardHistory = findViewById(R.id.cardHistory);
 
-
         // Load animations
         Animation bounceAnim = AnimationUtils.loadAnimation(this, R.anim.card_bounce);
-
-        // Set animations with staggered delays
         cardChapters.startAnimation(bounceAnim);
         cardViewModel.startAnimation(bounceAnim);
         cardQuiz.startAnimation(bounceAnim);
+        cardHelp.startAnimation(bounceAnim);
         cardLogout.startAnimation(bounceAnim);
         cardHistory.startAnimation(bounceAnim);
 
-
-        // Add press effect
+        // Press effects
         setupCardPressEffects();
 
         // Load user data
         loadUserData();
 
-        // Set click listeners
+        // Click listeners
         setupClickListeners();
     }
 
     private void setupCardPressEffects() {
-        int[] cards = {R.id.cardChapters, R.id.cardViewModel, R.id.cardQuiz, R.id.cardHistory, R.id.cardLogout};
+        int[] cards = {R.id.cardChapters, R.id.cardViewModel, R.id.cardQuiz, R.id.cardHistory, R.id.cardHelp, R.id.cardLogout};
 
         for (int cardId : cards) {
             CardView card = findViewById(cardId);
@@ -72,7 +76,6 @@ public class MenuActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-                        // Small bounce effect when released
                         Animation smallBounce = AnimationUtils.loadAnimation(this, R.anim.card_bounce);
                         smallBounce.setDuration(300);
                         v.startAnimation(smallBounce);
@@ -91,7 +94,14 @@ public class MenuActivity extends AppCompatActivity {
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
                             String username = documentSnapshot.getString("username");
-                            tvUsername.setText("🎉 Welcome, " + username + "!");
+
+                            String welcomeText = " Welcome, " + username + "!";
+                            tvUsername.setText(welcomeText);
+
+                            Animation bounceIn = AnimationUtils.loadAnimation(this, R.anim.bounce_in);
+                            tvUsername.startAnimation(bounceIn);
+
+                            tvUsername.startAnimation(bounceIn);
                         } else {
                             tvUsername.setText("Oops! We couldn't find your info.");
                         }
@@ -101,6 +111,7 @@ public class MenuActivity extends AppCompatActivity {
                     });
         }
     }
+
 
     private void setupClickListeners() {
         cardChapters.setOnClickListener(v -> {
@@ -123,6 +134,11 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(new Intent(this, QuizHistoryActivity.class));
         });
 
+        cardHelp.setOnClickListener(v -> {
+            Toast.makeText(this, "Opening Help...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, HelpActivity.class));
+        });
+
         cardLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Goodbye Genius!", Toast.LENGTH_SHORT).show();
@@ -134,12 +150,11 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Clean up animations
         if (cardChapters != null) cardChapters.clearAnimation();
         if (cardViewModel != null) cardViewModel.clearAnimation();
         if (cardQuiz != null) cardQuiz.clearAnimation();
+        if (cardHelp != null) cardHelp.clearAnimation();
         if (cardLogout != null) cardLogout.clearAnimation();
         if (cardHistory != null) cardHistory.clearAnimation();
-
     }
 }
