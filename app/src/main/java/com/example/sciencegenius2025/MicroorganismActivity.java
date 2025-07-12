@@ -1,6 +1,8 @@
 package com.example.sciencegenius2025;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,21 @@ public class MicroorganismActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_microorganism_fun);
+
+        Button backButton = findViewById(R.id.backButton2);
+        Button nextButton = findViewById(R.id.nextButton2);
+
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MicroorganismActivity.this, ChaptersActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        nextButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MicroorganismActivity.this, SolarSystemActivity.class);
+            startActivity(intent);
+        });
+
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();

@@ -1,34 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- AR Fragment -->
     <fragment
         android:id="@+id/ux_fragment"
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_rotate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
-        android:backgroundTint="#4CAF50"
-        android:contentDescription="Rotate Model"
-        android:src="@android:drawable/ic_media_play" />
 
+
+
+    <!-- Button Panel Container -->
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="vertical"
+        android:background="@drawable/bg_button_panel"
         android:padding="16dp"
-        android:background="#66000000"
         android:gravity="center_horizontal">
 
-        <!-- One row for 9 model buttons -->
+        <!-- Title Text -->
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose a Model to Explore!"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/comic_neue_bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Row 1 Buttons -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,83 +46,127 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/KidButtonStyle"
                     android:text="Heart"
-                    android:layout_margin="4dp" />
+                    android:backgroundTint="#FF8A80"
+                    app:icon="@drawable/ic_heart"
+                    app:iconGravity="textStart" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/KidButtonStyle"
                     android:text="Kidney"
-                    android:layout_margin="4dp" />
+                    android:backgroundTint="#A5D6A7"
+                    app:icon="@drawable/ic_kidney"
+                    app:iconGravity="textStart" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/KidButtonStyle"
                     android:text="Skeleton"
-                    android:layout_margin="4dp" />
+                    android:backgroundTint="#B39DDB"
+                    app:icon="@drawable/ic_skeleton"
+                    app:iconGravity="textStart" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/KidButtonStyle"
                     android:text="Virus"
-                    android:layout_margin="4dp" />
+                    android:backgroundTint="#81D4FA"
+                    app:icon="@drawable/ic_virus"
+                    app:iconGravity="textStart" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_model5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/KidButtonStyle"
                     android:text="Bacteria"
-                    android:layout_margin="4dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_model6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fungi"
-                    android:layout_margin="4dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_model7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Solar System"
-                    android:layout_margin="4dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_model8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Earth"
-                    android:layout_margin="4dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_model9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sun"
-                    android:layout_margin="4dp" />
+                    android:backgroundTint="#FFF59D"
+                    app:icon="@drawable/ic_bacteria"
+                    app:iconGravity="textStart" />
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Clear Button -->
+        <!-- Row 2 Buttons -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model6"
+                    style="@style/KidButtonStyle"
+                    android:text="Fungi"
+                    android:backgroundTint="#CE93D8"
+                    app:icon="@drawable/ic_fungi"
+                    app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model7"
+                    style="@style/KidButtonStyle"
+                    android:text="Solar System"
+                    android:backgroundTint="#90CAF9"
+                    app:icon="@drawable/ic_solar"
+                    app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model8"
+                    style="@style/KidButtonStyle"
+                    android:text="Earth"
+                    android:backgroundTint="#AED581"
+                    app:icon="@drawable/ic_earth"
+                    app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_model9"
+                    style="@style/KidButtonStyle"
+                    android:text="Sun"
+                    android:backgroundTint="#FFD54F"
+                    app:icon="@drawable/ic_sun"
+                    app:iconGravity="textStart" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <!-- Rotate Button on Left -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_rotate"
+            style="@style/KidButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotate Model"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF" />
+
+        <!-- Clear Button on Right -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_clear_models"
+            style="@style/KidButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clear Models"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center_horizontal" />
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF" />
+
+        <!-- Exit Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_exit"
+            style="@style/KidButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:backgroundTint="#607D8B"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp" />
+
     </LinearLayout>
-
-
 </FrameLayout>

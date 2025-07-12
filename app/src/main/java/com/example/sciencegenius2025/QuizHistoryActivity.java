@@ -2,6 +2,7 @@ package com.example.sciencegenius2025;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,9 @@ public class QuizHistoryActivity extends AppCompatActivity {
 
         setupRecyclerView();
         loadQuizHistory();
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish()); // Closes the activity
     }
 
     private void setupRecyclerView() {

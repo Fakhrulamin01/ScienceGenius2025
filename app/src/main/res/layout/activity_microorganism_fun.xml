@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Title -->
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -22,7 +21,10 @@
             android:fontFamily="@font/comic_font"
             android:textColor="#00796B"
             android:layout_gravity="center_horizontal"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:gravity="center"
+            android:textAlignment="center" />
+
 
         <!-- Section 1: What are microorganisms -->
         <androidx.cardview.widget.CardView
@@ -164,6 +166,42 @@
                     android:paddingBottom="32dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <!-- Bottom Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/backButton2"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="Back"
+                android:backgroundTint="#026580"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/comic_font"
+                android:textAllCaps="false" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/nextButton2"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="Next Chapter"
+                android:backgroundTint="#026580"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/comic_font"
+                android:textAllCaps="false" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

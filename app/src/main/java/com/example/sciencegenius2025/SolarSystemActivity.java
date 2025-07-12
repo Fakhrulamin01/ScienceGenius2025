@@ -1,6 +1,8 @@
 package com.example.sciencegenius2025;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,13 @@ public class SolarSystemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solar_system_fun);
+
+        Button backButton = findViewById(R.id.backButton3);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SolarSystemActivity.this, ChaptersActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -46,6 +47,8 @@ public class ModelActivity extends AppCompatActivity {
     private TransformableNode lastSelectedNode;
     private ObjectAnimator rotationAnimator;
     private boolean isRotating = false;
+
+
 
 
     @SuppressLint("ObjectAnimatorBinding")
@@ -100,7 +103,7 @@ public class ModelActivity extends AppCompatActivity {
             Toast.makeText(this, "All models cleared", Toast.LENGTH_SHORT).show();
         });
 
-        FloatingActionButton rotateButton = findViewById(R.id.btn_rotate);
+        MaterialButton rotateButton = findViewById(R.id.btn_rotate);
         rotateButton.setOnClickListener(v -> {
             if (lastSelectedNode == null) {
                 Toast.makeText(this, "No model selected", Toast.LENGTH_SHORT).show();
@@ -111,7 +114,7 @@ public class ModelActivity extends AppCompatActivity {
                 if (rotationAnimator != null) {
                     rotationAnimator.cancel();
                 }
-                rotateButton.setImageResource(android.R.drawable.ic_media_play);
+                rotateButton.setText("Rotate");
                 isRotating = false;
             } else {
                 rotationAnimator = ObjectAnimator.ofFloat(lastSelectedNode, "localRotation", 0f, 360f);
@@ -128,10 +131,17 @@ public class ModelActivity extends AppCompatActivity {
                     );
                 });
                 rotationAnimator.start();
-                rotateButton.setImageResource(android.R.drawable.ic_media_pause);
+                rotateButton.setText("Stop");
                 isRotating = true;
             }
         });
+
+        MaterialButton exitButton = findViewById(R.id.btn_exit);
+        exitButton.setOnClickListener(v -> {
+            finish(); // exits the current activity
+        });
+
+
         uploadModelsToFirestore(); // TEMPORARY — call only once to upload metadata
     }
 
@@ -211,6 +221,7 @@ public class ModelActivity extends AppCompatActivity {
 
         Pose camPose = arFragment.getArSceneView().getArFrame().getCamera().getPose();
         float[] forward = camPose.getZAxis();
+
         float[] pos = camPose.getTranslation();
         float distance = 1.0f;
 
@@ -231,6 +242,9 @@ public class ModelActivity extends AppCompatActivity {
         node.setRenderable(renderable);
         lastSelectedNode = node;
 
+        node.setLocalRotation(com.google.ar.sceneform.math.Quaternion.axisAngle(
+                new com.google.ar.sceneform.math.Vector3(0f, 1f, 0f), 0f));
+
         if (node.getScaleController() != null) {
             node.getScaleController().setMinScale(0.05f);
             node.getScaleController().setMaxScale(1.0f);
@@ -238,6 +252,8 @@ public class ModelActivity extends AppCompatActivity {
         // Set initial smaller scale (adjust values as needed)
         node.setLocalScale(new com.google.ar.sceneform.math.Vector3(0.2f, 0.2f, 0.2f));
         node.select();
+
+
     }
 
     // Gesture detector for swipe left/right
