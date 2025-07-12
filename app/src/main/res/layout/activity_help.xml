@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF9F0"
+    android:padding="24dp">
+
+    <ScrollView
+        android:id="@+id/helpScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/helpTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Need Help? 🧠"
+                android:textSize="26sp"
+                android:textColor="#333"
+                android:fontFamily="@font/comic_font"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Section 1: Welcome Message -->
+            <TextView
+                android:id="@+id/section1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="👋 Hi Science Genius!\nReady to explore the world of science? Here’s how to play!"
+                android:textSize="18sp"
+                android:textColor="#444"
+                android:fontFamily="@font/comic_font"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="6dp" />
+
+            <!-- Section 2: How to Use -->
+            <TextView
+                android:id="@+id/section2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ How to Use the App:\n\n✅ Choose a Topic: Humans, Microorganisms, or Solar System.\n✅ Read &amp; Learn: Scroll through fun illustrations.\n✅ Take a Quiz: Answer 10 questions to test your knowledge.\n✅ Earn Points: Get stars and unlock more topics!\n\n🔬 📚 🧠 ⭐"
+                android:textSize="18sp"
+                android:textColor="#444"
+                android:fontFamily="@font/comic_font"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="6dp"
+                tools:ignore="HardcodedText" />
+
+            <!-- Section 3: Navigation Tips -->
+            <TextView
+                android:id="@+id/section3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📱 Navigation Tips:\n\n🔙 Use the Back button to return to the main screen.\n🏆 Your score is shown after each quiz.\n💡 Questions change every time you play!"
+                android:textSize="18sp"
+                android:textColor="#444"
+                android:fontFamily="@font/comic_font"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="6dp" />
+
+            <!-- Section 4: Contact -->
+            <TextView
+                android:id="@+id/section4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✉️ Need Help?\nHaving trouble? Ask your teacher or tell a grown-up to help!\n\nContact us at:\nsciencegenius@appsupport.com"
+                android:textSize="18sp"
+                android:textColor="#444"
+                android:fontFamily="@font/comic_font"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="6dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="200dp"
+        android:layout_height="56dp"
+        android:text="Back to Main"
+        android:textAllCaps="false"
+        android:backgroundTint="#026580"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/comic_font"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
