@@ -2,8 +2,10 @@ package com.example.sciencegenius2025;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,17 +54,14 @@ public class QuizHistoryActivity extends AppCompatActivity {
         adapter = new QuizHistoryAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
     }
-
     private void loadQuizHistory() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(ProgressBar.GONE);
             return;
         }
-
         String uid = currentUser.getUid();
 
         db.collection("quiz")
@@ -96,6 +95,14 @@ public class QuizHistoryActivity extends AppCompatActivity {
                                     "No quiz history found", Toast.LENGTH_SHORT).show();
                         } else {
                             adapter.updateData(historyItems);
+
+                            long bestScore = 0;
+                            for (QuizHistoryItem item : historyItems) {
+                                if (item.getScore() > bestScore) bestScore = item.getScore();
+                            }
+                            TextView summary = findViewById(R.id.tvSummary);
+                            summary.setText("You've completed " + historyItems.size() + " quizzes! Best score: " + bestScore + "/10");
+                            summary.setVisibility(View.VISIBLE);
                         }
                     } else {
                         Log.e("QuizHistory", "Error getting quiz documents: ", task.getException());
@@ -104,6 +111,47 @@ public class QuizHistoryActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+        showChapterProgress();
+
     }
+
+    private void showChapterProgress() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) return;
+
+        String uid = user.getUid();
+        db.collection("progress")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot.exists()) {
+                        Map<String, Object> data = snapshot.getData();
+                        if (data != null) {
+                            int completedCount = 0;
+                            String[] chapters = {"human_body", "microorganism", "solar_system"};
+
+                            for (String chapter : chapters) {
+                                Map<String, Object> chapterStatus = (Map<String, Object>) data.get(chapter);
+                                if (chapterStatus != null && Boolean.TRUE.equals(chapterStatus.get("completed"))) {
+                                    completedCount++;
+                                }
+                            }
+
+                            TextView chapterMsg = findViewById(R.id.tvChapterComplete);
+                            chapterMsg.setVisibility(View.VISIBLE);
+
+                            if (completedCount == chapters.length) {
+                                chapterMsg.setText("🎉 You've completed all chapters!");
+                            } else if (completedCount > 0) {
+                                chapterMsg.setText("📘 You've completed " + completedCount + " out of " + chapters.length + " chapters!");
+                            } else {
+                                chapterMsg.setText("📖 Start reading chapters to track your progress!");
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("ChapterProgress", "Failed to fetch chapter progress", e));
+    }
+
 
 }

@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_marginBottom="12dp"
+    android:elevation="6dp"
+    android:padding="12dp"
+    android:backgroundTint="#FFFDE7">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
+        <!-- Quiz name with badge icon -->
         <TextView
             android:id="@+id/tvQuizName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:text=""
+            android:fontFamily="@font/comic_font"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:drawablePadding="8dp"
+            android:paddingBottom="4dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Score -->
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:text=""
+            android:fontFamily="@font/comic_font"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"/>
-        </LinearLayout>
+        <!-- Timestamp -->
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:textColor="#888"
+            android:layout_marginTop="6dp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

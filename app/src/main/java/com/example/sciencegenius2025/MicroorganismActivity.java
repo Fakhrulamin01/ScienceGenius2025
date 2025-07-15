@@ -8,13 +8,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MicroorganismActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
-
     private TextView titleView, section1View, section2View, section3View, section4View;
 
     @Override
@@ -32,10 +37,11 @@ public class MicroorganismActivity extends AppCompatActivity {
         });
 
         nextButton.setOnClickListener(v -> {
+            markChapterAsComplete("microorganism");
+
             Intent intent = new Intent(MicroorganismActivity.this, SolarSystemActivity.class);
             startActivity(intent);
         });
-
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
@@ -47,13 +53,11 @@ public class MicroorganismActivity extends AppCompatActivity {
         section3View = findViewById(R.id.section3);
         section4View = findViewById(R.id.section4);
 
-
         // Fetch content from Firestore
         db.collection("chapters").document("microorganism")
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     if (snapshot.exists()) {
-                        // Set text if fields are found
                         titleView.setText(snapshot.getString("title"));
                         section1View.setText(snapshot.getString("section1"));
                         section2View.setText(snapshot.getString("section2"));
@@ -66,6 +70,24 @@ public class MicroorganismActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to load content: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
+    }
 
+    private void markChapterAsComplete(String chapterId) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        String uid = user.getUid();
+
+        Map<String, Object> chapterProgress = new HashMap<>();
+        chapterProgress.put("completed", true);
+        chapterProgress.put("timestamp", new com.google.firebase.Timestamp(new Date()));
+
+        Map<String, Object> data = new HashMap<>();
+        data.put(chapterId, chapterProgress);
+
+        FirebaseFirestore.getInstance()
+                .collection("progress")
+                .document(uid)
+                .set(data, SetOptions.merge());
     }
 }

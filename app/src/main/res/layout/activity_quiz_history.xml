@@ -3,23 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/progress_bg"
     tools:context=".QuizHistoryActivity">
 
+    <!-- Chapter Completion Message -->
+    <TextView
+        android:id="@+id/tvChapterComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chapter progress will show here"
+        android:fontFamily="@font/comic_font"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"
+        android:gravity="center"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="#E8F5E9" />
+
+    <!-- Title below Chapter Completion -->
     <TextView
         android:id="@+id/tvHistoryTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your Quiz History"
+        android:layout_below="@id/tvChapterComplete"
+        android:text="Track My Progress"
+        android:textColor="#000000"
         android:textSize="24sp"
+        android:fontFamily="@font/comic_font"
         android:textStyle="bold"
         android:gravity="center"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp" />
+
+    <!-- Summary below Title -->
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHistoryTitle"
+        android:text="🎯 You've completed 0 quizzes!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/comic_font"
+        android:visibility="gone" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvQuizHistory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/tvHistoryTitle"
+        android:fontFamily="@font/comic_font"
+        android:layout_below="@id/tvSummary"
         android:layout_above="@id/backButton"
         android:clipToPadding="false"
         android:paddingBottom="8dp" />

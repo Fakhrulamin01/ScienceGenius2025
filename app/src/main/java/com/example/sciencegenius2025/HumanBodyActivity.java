@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.SetOptions;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,9 +33,14 @@ public class HumanBodyActivity extends AppCompatActivity {
         backButton.setOnClickListener(v -> finish());
 
         nextButton.setOnClickListener(v -> {
+            // Mark the chapter as complete
+            markChapterAsComplete("human_body");
+
+            // Go to the next chapter
             Intent intent = new Intent(HumanBodyActivity.this, MicroorganismActivity.class);
             startActivity(intent);
         });
+
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
@@ -65,4 +75,24 @@ public class HumanBodyActivity extends AppCompatActivity {
                 });
 
     }
+    private void markChapterAsComplete(String chapterId) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        String uid = user.getUid();
+
+        Map<String, Object> chapterProgress = new HashMap<>();
+        chapterProgress.put("completed", true);
+        chapterProgress.put("timestamp", new com.google.firebase.Timestamp(new java.util.Date()));
+
+        Map<String, Object> data = new HashMap<>();
+        data.put(chapterId, chapterProgress);
+
+        FirebaseFirestore.getInstance()
+                .collection("progress")
+                .document(uid)
+                .set(data, SetOptions.merge());
+    }
+
+
 }
